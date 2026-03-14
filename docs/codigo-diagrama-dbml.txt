@@ -1,0 +1,73 @@
+Table instrumentos {
+  id integer [pk, increment]
+  nome varchar [not null]
+  descricao text
+  preco numeric [not null]
+  ano_fabricacao integer
+  categoria varchar [not null]
+  marca varchar
+  qtd_estoque integer [not null, default: 0]
+  fabricado_em_mari boolean [default: false]
+}
+
+Table clientes {
+  id integer [pk, increment]
+  nome varchar [not null]
+  email varchar [not null, unique]
+  telefone varchar
+  cpf varchar [not null, unique]
+  endereco varchar
+  cidade varchar
+  estado varchar
+  torce_flamengo boolean [default: false]
+  assiste_op boolean [default: false]
+}
+
+Table vendedores {
+  id integer [pk, increment]
+  nome varchar [not null]
+  email varchar [not null, unique]
+  telefone varchar
+  cpf varchar [not null, unique]
+  data_admissao date
+}
+
+Table compras {
+  id integer [pk, increment]
+  id_cliente integer [not null]
+  id_vendedor integer [not null]
+  data_compra date [not null]
+  valor_total numeric [not null]
+  status_compra varchar [not null, default: 'pendente']
+  desconto_aplicado numeric [default: 0]
+}
+
+Table itens_compra {
+  id integer [pk, increment]
+  id_compra integer [not null]
+  id_instrumento integer [not null]
+  qtd_item integer [not null]
+  preco_unitario numeric [not null]
+}
+
+Table pagamentos {
+  id integer [pk, increment]
+  id_compra integer [not null, unique]
+  data_pagamento date
+  status_pagamento varchar [not null, default: 'pendente']
+  id_forma_pagamento integer [not null]
+}
+
+Table formas_pagamento {
+  id integer [pk, increment]
+  descricao varchar [not null, unique]
+}
+
+// Relacionamentos
+
+Ref: compras.id_cliente > clientes.id
+Ref: compras.id_vendedor > vendedores.id
+Ref: itens_compra.id_compra > compras.id
+Ref: itens_compra.id_instrumento > instrumentos.id
+Ref: pagamentos.id_compra - compras.id
+Ref: pagamentos.id_forma_pagamento > formas_pagamento.id
