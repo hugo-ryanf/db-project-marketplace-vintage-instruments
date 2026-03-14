@@ -1,1 +1,4 @@
-.env 
+# Guardar variáveis sigilosas
+.env
+# Ambiente virtual
+\venv
