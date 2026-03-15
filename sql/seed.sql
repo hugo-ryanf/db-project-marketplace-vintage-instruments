@@ -41,5 +41,4 @@ VALUES
     ('credito'),
     ('debito'),
     ('boleto'),
-    ('pix'),
-    ('berries');
+    ('pix');
