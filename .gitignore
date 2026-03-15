@@ -1,8 +1,6 @@
-# Guardar variáveis sigilosas
+venv/
+__pycache__/
 .env
-# Ambiente virtual
-\venv
-
-**/__pycache__/
+node_modules/
+.next/
 *.pyc
-*.pyo
