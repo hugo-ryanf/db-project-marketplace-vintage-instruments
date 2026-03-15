@@ -28,6 +28,7 @@ CREATE TABLE clientes (
     nome VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL UNIQUE,
     telefone VARCHAR(20) NOT NULL UNIQUE,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
     endereco TEXT NOT NULL,
     cidade VARCHAR(30) NOT NULL,
     estado VARCHAR(30) NOT NULL,
