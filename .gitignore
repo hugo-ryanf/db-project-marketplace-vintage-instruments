@@ -2,3 +2,7 @@
 .env
 # Ambiente virtual
 \venv
+
+**/__pycache__/
+*.pyc
+*.pyo
