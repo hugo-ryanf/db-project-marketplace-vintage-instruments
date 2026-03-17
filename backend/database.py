@@ -1,6 +1,6 @@
 import psycopg2 
 
-def connection():
+def get_connection():
     return psycopg2.connect(
         host="localhost",
         port= 5432,
@@ -10,7 +10,7 @@ def connection():
     )
 
 if __name__ == "__main__":
-    conn = connection()
+    conn = get_connection()
     print("Conexão bem-sucedida!")
     conn.close()
 
