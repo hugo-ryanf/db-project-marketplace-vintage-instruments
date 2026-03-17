@@ -86,3 +86,65 @@ def deletar_instrumento(id: int):
     if resultado:
         return {"detail": "Instrumento removido com sucesso"}
     raise HTTPException(status_code=404, detail="Instrumento não encontrado")
+
+# Rotas de Clientes 
+
+
+@app.post("/clientes", status_code=201)
+def criar_cliente(dados: ClienteCreate):
+    conn = get_connection()
+    crud = ClienteCRUD(conn)
+    resultado = crud.inserir(dados)
+    conn.close()
+    return resultado
+
+
+@app.get("/clientes")
+def listar_clientes():
+    conn = get_connection()
+    crud = ClienteCRUD(conn)
+    resultado = crud.listar_todos()
+    conn.close()
+    return resultado
+
+
+@app.get("/clientes/busca")
+def buscar_cliente_por_nome(nome: str):
+    conn = get_connection()
+    crud = ClienteCRUD(conn)
+    resultado = crud.buscar_por_nome(nome)
+    conn.close()
+    return resultado
+
+
+@app.get("/clientes/{id}")
+def buscar_cliente_por_id(id: int):
+    conn = get_connection()
+    crud = ClienteCRUD(conn)
+    resultado = crud.buscar_por_id(id)
+    conn.close()
+    if resultado:
+        return resultado
+    raise HTTPException(status_code=404, detail="Cliente não encontrado")
+
+
+@app.put("/clientes/{id}")
+def atualizar_cliente(id: int, dados: ClienteCreate):
+    conn = get_connection()
+    crud = ClienteCRUD(conn)
+    resultado = crud.atualizar(id, dados)
+    conn.close()
+    if resultado:
+        return resultado
+    raise HTTPException(status_code=404, detail="Cliente não encontrado")
+
+
+@app.delete("/clientes/{id}")
+def deletar_cliente(id: int):
+    conn = get_connection()
+    crud = ClienteCRUD(conn)
+    resultado = crud.remover(id)
+    conn.close()
+    if resultado:
+        return {"detail": "Cliente removido com sucesso"}
+    raise HTTPException(status_code=404, detail="Cliente não encontrado")
