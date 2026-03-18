@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:16
+    build:
+      context: .
+      dockerfile: db/Dockerfile
     ports:
       - "5432:5432"
     environment:
@@ -11,6 +13,30 @@ services:
       - POSTGRES_DB=vintage_instruments
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d vintage_instruments"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
