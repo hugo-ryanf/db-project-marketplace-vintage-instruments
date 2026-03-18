@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
   title: "Marketplace Vintage Instruments",
@@ -14,9 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className="bg-zinc-950 text-zinc-100 min-h-screen">
-        <Header />
-        <main className="max-w-6xl mx-auto px-6 py-8">{children}</main>
+      <body className="bg-zinc-950 text-zinc-100 min-h-screen flex">
+        <Sidebar />
+        <main className="flex-1 px-8 py-8">{children}</main>
       </body>
     </html>
   );
