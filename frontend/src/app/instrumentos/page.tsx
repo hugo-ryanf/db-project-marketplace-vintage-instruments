@@ -292,7 +292,7 @@ export default function InstrumentosPage() {
               <dd className="text-zinc-200">{foundById.descricao || "Sem descrição"}</dd>
             </div>
             <div>
-              <dt className="text-zinc-400 mb-1">Fabricado em série</dt>
+              <dt className="text-zinc-400 mb-1">Fabricado em Seridó</dt>
               <dd className="text-zinc-100">{foundById.fabricado_em_serido ? "Sim" : "Não"}</dd>
             </div>
           </dl>

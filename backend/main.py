@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from database import get_connection
-from crud import InstrumentoCRUD, ClienteCRUD
+from crud import InstrumentoCRUD, ClienteCRUD, RelatorioCRUD
 from schemas import InstrumentoCreate, ClienteCreate
 
 app = FastAPI(
@@ -148,3 +148,23 @@ def deletar_cliente(id: int):
     if resultado:
         return {"detail": "Cliente removido com sucesso"}
     raise HTTPException(status_code=404, detail="Cliente não encontrado")
+
+
+# Rotas de Relatórios
+
+@app.get("/relatorios/instrumentos-por-categoria")
+def relatorio_instrumentos_por_categoria():
+    conn = get_connection()
+    crud = RelatorioCRUD(conn)
+    resultado = crud.relatorio_instrumentos_por_categoria()
+    conn.close()
+    return resultado
+
+
+@app.get("/relatorios/clientes-por-estado")
+def relatorio_clientes_por_estado():
+    conn = get_connection()
+    crud = RelatorioCRUD(conn)
+    resultado = crud.relatorio_clientes_por_estado()
+    conn.close()
+    return resultado

@@ -3,6 +3,8 @@ import {
   ClientePayload,
   Instrumento,
   InstrumentoPayload,
+  RelatorioClientePorEstado,
+  RelatorioInstrumentoPorCategoria,
 } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -111,4 +113,18 @@ export async function deleteCliente(id: number): Promise<void> {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("Erro ao deletar cliente");
+}
+
+// ─── Relatórios ───────────────────────────────────────────────────────────────
+
+export async function getRelatorioInstrumentosPorCategoria(): Promise<RelatorioInstrumentoPorCategoria[]> {
+  const res = await fetch(`${API_URL}/relatorios/instrumentos-por-categoria`);
+  if (!res.ok) throw new Error("Erro ao buscar relatório de instrumentos");
+  return res.json();
+}
+
+export async function getRelatorioClientesPorEstado(): Promise<RelatorioClientePorEstado[]> {
+  const res = await fetch(`${API_URL}/relatorios/clientes-por-estado`);
+  if (!res.ok) throw new Error("Erro ao buscar relatório de clientes");
+  return res.json();
 }

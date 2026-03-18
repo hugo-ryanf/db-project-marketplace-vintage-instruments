@@ -169,7 +169,7 @@ export default function InstrumentoForm({ instrumento, onSave, onCancel }: Props
           className="w-4 h-4 accent-blue-500"
         />
         <label htmlFor="fabricado_em_serido" className="text-sm text-zinc-300">
-          Fabricado em série
+          Fabricado em Seridó
         </label>
       </div>
 

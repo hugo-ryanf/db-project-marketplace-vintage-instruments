@@ -149,3 +149,43 @@ class ClienteCRUD:
         self.connection.commit()
         cursor.close()
         return linhas_afetadas > 0
+
+
+class RelatorioCRUD:
+    def __init__(self, connection):
+        self.connection = connection
+
+    def relatorio_instrumentos_por_categoria(self):
+        cursor = self.connection.cursor()
+        cursor.execute(
+            """SELECT
+                categoria,
+                COUNT(*)                 AS qtd_instrumentos,
+                SUM(qtd_estoque)         AS total_estoque,
+                SUM(preco * qtd_estoque) AS valor_total,
+                AVG(preco)               AS preco_medio
+            FROM instrumentos
+            GROUP BY categoria
+            ORDER BY qtd_instrumentos DESC"""
+        )
+        resultados = cursor.fetchall()
+        colunas = [desc[0] for desc in cursor.description]
+        cursor.close()
+        return [dict(zip(colunas, row)) for row in resultados]
+
+    def relatorio_clientes_por_estado(self):
+        cursor = self.connection.cursor()
+        cursor.execute(
+            """SELECT
+                estado,
+                COUNT(*)                                         AS qtd_clientes,
+                SUM(CASE WHEN torce_flamengo THEN 1 ELSE 0 END) AS qtd_flamengo,
+                SUM(CASE WHEN assiste_op     THEN 1 ELSE 0 END) AS qtd_one_piece
+            FROM clientes
+            GROUP BY estado
+            ORDER BY qtd_clientes DESC"""
+        )
+        resultados = cursor.fetchall()
+        colunas = [desc[0] for desc in cursor.description]
+        cursor.close()
+        return [dict(zip(colunas, row)) for row in resultados]

@@ -45,3 +45,18 @@ export interface ClientePayload {
   torce_flamengo?: boolean;
   assiste_op?: boolean;
 }
+
+export interface RelatorioInstrumentoPorCategoria {
+  categoria: string;
+  qtd_instrumentos: number;
+  total_estoque: number;
+  valor_total: number;
+  preco_medio: number;
+}
+
+export interface RelatorioClientePorEstado {
+  estado: string;
+  qtd_clientes: number;
+  qtd_flamengo: number;
+  qtd_one_piece: number;
+}
