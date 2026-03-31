@@ -60,3 +60,54 @@ export interface RelatorioClientePorEstado {
   qtd_flamengo: number;
   qtd_one_piece: number;
 }
+
+export interface Vendedor {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string | null;
+  cpf: string;
+  data_admissao: string | null;
+}
+
+export interface VendedorPayload {
+  nome: string;
+  email: string;
+  telefone?: string;
+  cpf: string;
+  data_admissao?: string;
+}
+
+export interface RelatorioVendasMensais {
+  id_vendedor: number;
+  vendedor: string;
+  ano: number;
+  mes: number;
+  qtd_vendas: number;
+  total_vendas: number;
+  ticket_medio: number;
+}
+
+export interface FormaPagamento {
+  id: number;
+  descricao: string;
+}
+
+export interface ItemCompra {
+  id_instrumento: number;
+  nome: string;
+  qtd_item: number;
+  preco_unitario: number;
+}
+
+export interface Compra {
+  id: number;
+  data_compra: string;
+  valor_total: number;
+  status_compra: string;
+  desconto_aplicado: number;
+  vendedor: string;
+  forma_pagamento: string;
+  status_pagamento: string;
+  itens: ItemCompra[];
+}

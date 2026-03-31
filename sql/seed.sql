@@ -42,3 +42,12 @@ VALUES
     ('debito'),
     ('boleto'),
     ('pix');
+
+-- Vendedores (4 registros)
+
+INSERT INTO vendedores (nome, email, telefone, cpf, data_admissao)
+VALUES
+    ('Rodrigo Alencar', 'rodrigo.alencar@vintage.com', '(83) 99911-1111', '100.200.300-40', '2021-03-15'),
+    ('Fernanda Melo', 'fernanda.melo@vintage.com', '(83) 99922-2222', '200.300.400-50', '2022-06-01'),
+    ('Tiago Brito', 'tiago.brito@vintage.com', '(83) 99933-3333', '300.400.500-60', '2020-01-10'),
+    ('Camila Nogueira', 'camila.nogueira@vintage.com', '(83) 99944-4444', '400.500.600-70', '2023-09-20');
