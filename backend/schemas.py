@@ -32,3 +32,31 @@ class ClienteCreate(BaseModel):
 
 class ClienteResponse(ClienteCreate):
     id: int
+
+
+# ─── Vendedor ─────────────────────────────────────────────────────────────────
+
+class VendedorCreate(BaseModel):
+    nome: str
+    email: str
+    telefone: Optional[str] = None
+    cpf: str
+    data_admissao: Optional[str] = None  # formato: YYYY-MM-DD
+
+
+class VendedorResponse(VendedorCreate):
+    id: int
+
+
+# ─── Compra ───────────────────────────────────────────────────────────────────
+
+class ItemCompraCreate(BaseModel):
+    id_instrumento: int
+    qtd_item: int
+
+
+class CompraCreate(BaseModel):
+    id_cliente: int
+    id_vendedor: int
+    id_forma_pagamento: int
+    itens: list[ItemCompraCreate]
